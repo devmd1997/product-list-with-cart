@@ -7,6 +7,7 @@ import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
 import tseslint from 'typescript-eslint'
 import { defineConfig, globalIgnores } from 'eslint/config'
+import { parserOptions } from "storybook/internal/babel";
 
 export default defineConfig([globalIgnores(['dist']), {
   files: ['**/*.{ts,tsx}'],
@@ -19,5 +20,16 @@ export default defineConfig([globalIgnores(['dist']), {
   languageOptions: {
     ecmaVersion: 2020,
     globals: globals.browser,
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json', './tsconfig.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+}, {
+  files: ['.storybook/**/*.{ts,tsx}'],
+  languageOptions: {
+    parserOptions: {
+      project: null,
+    },
   },
 }, ...storybook.configs["flat/recommended"]])

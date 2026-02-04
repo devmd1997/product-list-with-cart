@@ -4,31 +4,40 @@
 @layer theme, base, components, utilities;
 @layer theme {
   :root, :host {
-    --font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    --ui-font-sans: ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
       "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-    --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
+    --ui-font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono",
       "Courier New", monospace;
-    --color-rose-50: oklch(96.9% 0.015 12.422);
-    --color-rose-400: oklch(71.2% 0.194 13.428);
-    --color-rose-500: oklch(64.5% 0.246 16.439);
-    --color-rose-900: oklch(41% 0.159 10.272);
-    --color-white: #fff;
-    --spacing: 8px;
-    --text-sm: 14px;
-    --text-base: 16px;
-    --text-lg: 24px;
-    --text-xl: 40px;
-    --font-weight-semibold: 600;
-    --default-font-family: var(--font-sans);
-    --default-mono-font-family: var(--font-mono);
-    --color-button-primary: var(--color-red);
-    --color-button-secondary: white;
-    --color-button-primary-text: white;
-    --color-button-secondary-text: var(--color-rose-900);
-    --color-button-secondary-text-hover: var(--color-red);
-    --color-border-default: var(--color-rose-400);
-    --color-border-selected: var(--color-red);
-    --font-red-hat: "Red Hat Display", sans-serif;
+    --ui-color-rose-50: oklch(96.9% 0.015 12.422);
+    --ui-color-rose-400: oklch(71.2% 0.194 13.428);
+    --ui-color-rose-500: oklch(64.5% 0.246 16.439);
+    --ui-color-rose-900: oklch(41% 0.159 10.272);
+    --ui-color-white: #fff;
+    --ui-spacing: 8px;
+    --ui-text-sm: 14px;
+    --ui-text-base: 16px;
+    --ui-text-lg: 24px;
+    --ui-text-xl: 40px;
+    --ui-font-weight-semibold: 600;
+    --ui-font-weight-bold: 700;
+    --ui-default-font-family: var(--ui-font-sans);
+    --ui-default-mono-font-family: var(--ui-font-mono);
+    --ui-color-button-primary: var(--ui-color-red);
+    --ui-color-button-primary-hover: var(--ui-color-red);
+    @supports (color: color-mix(in lab, red, red)) {
+      --ui-color-button-primary-hover: color-mix(
+    in srgb,
+    var(--ui-color-red),
+    black 25%
+  );
+    }
+    --ui-color-button-secondary: white;
+    --ui-color-button-primary-text: white;
+    --ui-color-button-secondary-text: var(--ui-color-rose-900);
+    --ui-color-button-secondary-text-hover: var(--ui-color-red);
+    --ui-color-border-default: var(--ui-color-rose-400);
+    --ui-color-border-selected: var(--ui-color-red);
+    --ui-font-red-hat: "Red Hat Display", sans-serif;
   }
 }
 @layer base {
@@ -42,9 +51,9 @@
     line-height: 1.5;
     -webkit-text-size-adjust: 100%;
     tab-size: 4;
-    font-family: var(--default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
-    font-feature-settings: var(--default-font-feature-settings, normal);
-    font-variation-settings: var(--default-font-variation-settings, normal);
+    font-family: var(--ui-default-font-family, ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji");
+    font-feature-settings: var(--ui-default-font-feature-settings, normal);
+    font-variation-settings: var(--ui-default-font-variation-settings, normal);
     -webkit-tap-highlight-color: transparent;
   }
   hr {
@@ -69,9 +78,9 @@
     font-weight: bolder;
   }
   code, kbd, samp, pre {
-    font-family: var(--default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
-    font-feature-settings: var(--default-mono-font-feature-settings, normal);
-    font-variation-settings: var(--default-mono-font-variation-settings, normal);
+    font-family: var(--ui-default-mono-font-family, ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace);
+    font-feature-settings: var(--ui-default-mono-font-feature-settings, normal);
+    font-variation-settings: var(--ui-default-mono-font-variation-settings, normal);
     font-size: 1em;
   }
   small {
@@ -180,88 +189,114 @@
   }
 }
 @layer utilities {
-  .flex-row-between-center {
+  .ui\:flex-row-between-center {
     display: flex;
     justify-content: space-between;
     align-items: center;
   }
-  .flex-row-center-content {
+  .ui\:flex-row-center-content {
     display: flex;
     justify-content: center;
     align-items: center;
   }
-  .size-2\.5 {
-    width: calc(var(--spacing) * 2.5);
-    height: calc(var(--spacing) * 2.5);
+  .ui\:size-2\.5 {
+    width: calc(var(--ui-spacing) * 2.5);
+    height: calc(var(--ui-spacing) * 2.5);
   }
-  .gap-1 {
-    gap: calc(var(--spacing) * 1);
+  .ui\:w-full {
+    width: 100%;
   }
-  .rounded-full {
+  .ui\:cursor-default {
+    cursor: default;
+  }
+  .ui\:cursor-pointer {
+    cursor: pointer;
+  }
+  .ui\:gap-1 {
+    gap: calc(var(--ui-spacing) * 1);
+  }
+  .ui\:rounded-full {
     border-radius: calc(infinity * 1px);
   }
-  .border {
+  .ui\:border {
     border-style: var(--tw-border-style);
     border-width: 1px;
   }
-  .border-border-default {
-    border-color: var(--color-border-default);
+  .ui\:border-border-default {
+    border-color: var(--ui-color-border-default);
   }
-  .border-white {
-    border-color: var(--color-white);
+  .ui\:border-white {
+    border-color: var(--ui-color-white);
   }
-  .bg-button-primary {
-    background-color: var(--color-button-primary);
+  .ui\:bg-button-primary {
+    background-color: var(--ui-color-button-primary);
   }
-  .bg-button-secondary {
-    background-color: var(--color-button-secondary);
+  .ui\:bg-button-secondary {
+    background-color: var(--ui-color-button-secondary);
   }
-  .px-3 {
-    padding-inline: calc(var(--spacing) * 3);
+  .ui\:px-3 {
+    padding-inline: calc(var(--ui-spacing) * 3);
   }
-  .py-2 {
-    padding-block: calc(var(--spacing) * 2);
+  .ui\:py-2 {
+    padding-block: calc(var(--ui-spacing) * 2);
   }
-  .text-preset-3 {
-    font-size: var(--text-base);
+  .ui\:text-preset-3 {
+    font-size: var(--ui-text-base);
     line-height: 150%;
     letter-spacing: 0px;
     font-weight: bold;
   }
-  .text-button-primary-text {
-    color: var(--color-button-primary-text);
+  .ui\:text-preset-4 {
+    font-size: var(--ui-text-sm);
+    line-height: 150%;
+    letter-spacing: 0px;
+    font-weight: normal;
   }
-  .text-button-secondary-text {
-    color: var(--color-button-secondary-text);
+  .ui\:font-bold {
+    --tw-font-weight: var(--ui-font-weight-bold);
+    font-weight: var(--ui-font-weight-bold);
   }
-  .group-hover\:text-button-secondary-text-hover {
-    &:is(:where(.group):hover *) {
+  .ui\:text-button-primary-text {
+    color: var(--ui-color-button-primary-text);
+  }
+  .ui\:text-button-secondary-text {
+    color: var(--ui-color-button-secondary-text);
+  }
+  .ui\:group-hover\:text-button-secondary-text-hover {
+    &:is(:where(.ui\:group):hover *) {
       @media (hover: hover) {
-        color: var(--color-button-secondary-text-hover);
+        color: var(--ui-color-button-secondary-text-hover);
       }
     }
   }
-  .hover\:border-border-selected {
+  .ui\:hover\:border-border-selected {
     &:hover {
       @media (hover: hover) {
-        border-color: var(--color-border-selected);
+        border-color: var(--ui-color-border-selected);
+      }
+    }
+  }
+  .ui\:hover\:bg-button-primary-hover {
+    &:hover {
+      @media (hover: hover) {
+        background-color: var(--ui-color-button-primary-hover);
       }
     }
   }
 }
 :root {
-  --color-red: #c73b0f;
-  --color-rose-900: #260f08;
-  --color-rose-500: #87635a;
-  --color-rose-400: #ad8a85;
-  --color-rose-300: #caafa7;
-  --color-rose-100: #f5eeec;
-  --color-rose-50: #fcf8f6;
-  --color-green: #1ea575;
+  --ui-color-red: #c73b0f;
+  --ui-color-rose-900: #260f08;
+  --ui-color-rose-500: #87635a;
+  --ui-color-rose-400: #ad8a85;
+  --ui-color-rose-300: #caafa7;
+  --ui-color-rose-100: #f5eeec;
+  --ui-color-rose-50: #fcf8f6;
+  --ui-color-green: #1ea575;
 }
 @layer base {
   html {
-    font-family: var(--font-red-hat);
+    font-family: var(--ui-font-red-hat);
   }
   button {
     cursor: pointer;
@@ -272,10 +307,15 @@
   inherits: false;
   initial-value: solid;
 }
+@property --tw-font-weight {
+  syntax: "*";
+  inherits: false;
+}
 @layer properties {
   @supports ((-webkit-hyphens: none) and (not (margin-trim: inline))) or ((-moz-orient: inline) and (not (color:rgb(from red r g b)))) {
     *, ::before, ::after, ::backdrop {
       --tw-border-style: solid;
+      --tw-font-weight: initial;
     }
   }
 }

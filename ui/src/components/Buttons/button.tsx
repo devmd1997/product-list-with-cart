@@ -31,14 +31,14 @@ export function Button(props: ButtonProps) {
   const { label, iconLeft, iconRight, primary, onClick, iconBorders } = props;
   const hasTwoIcons = iconLeft && iconRight;
   const buttonVariantStyle = primary
-    ? "bg-button-primary"
-    : "bg-button-secondary border border-border-default hover:border-border-selected";
+    ? `ui:bg-button-primary ${hasTwoIcons ? "ui:cursor-default" : "ui:hover:bg-button-primary-hover"}`
+    : "ui:bg-button-secondary ui:border ui:border-border-default ui:hover:border-border-selected";
   return (
     <ButtonContext.Provider
       value={{ label, iconLeft, iconRight, primary, iconBorders }}
     >
       <button
-        className={`group rounded-full px-3 py-2 ${hasTwoIcons ? "flex-row-between-center" : "flex-row-center-content"} ${buttonVariantStyle} gap-1`}
+        className={`ui:group ui:w-full ui:rounded-full ui:px-3 ui:py-2 ${hasTwoIcons ? "ui:flex-row-between-center" : "ui:flex-row-center-content"} ${buttonVariantStyle} ui:gap-1`}
         onClick={(e) => {
           e.preventDefault();
           onClick?.();
@@ -53,20 +53,30 @@ export function Button(props: ButtonProps) {
 }
 
 Button.Label = function ButtonLabel() {
-  const { label, primary } = useButtonContext();
+  const { label, primary, iconLeft, iconRight } = useButtonContext();
   const textStyle = primary
-    ? "text-button-primary-text"
-    : "text-button-secondary-text group-hover:text-button-secondary-text-hover";
-  return <span className={`text-preset-3 ${textStyle}`}>{label}</span>;
+    ? "ui:text-button-primary-text"
+    : "ui:text-button-secondary-text ui:group-hover:text-button-secondary-text-hover";
+  const hasIcons = iconLeft || iconRight;
+  return (
+    <span
+      className={`${hasIcons ? "ui:text-preset-4 ui:font-bold" : "ui:text-preset-3"} ${textStyle}`}
+    >
+      {label}
+    </span>
+  );
 };
 
 Button.IconLeft = function ButtonIconLeft() {
-  const { iconLeft, iconBorders } = useButtonContext();
+  const { iconLeft, iconBorders, iconRight } = useButtonContext();
+  const hasTwoIcons = iconLeft && iconRight;
   const borderStyle =
-    "rounded-full border border-white flex-row-center-content";
+    "ui:rounded-full ui:border ui:border-white ui:flex-row-center-content";
   return (
     iconLeft && (
-      <div className={`size-2.5 ${iconBorders ? borderStyle : ""}`}>
+      <div
+        className={`ui:size-2.5 ${iconBorders ? borderStyle : ""} ${hasTwoIcons ? "ui:cursor-pointer" : ""}`}
+      >
         <img src={iconLeft} alt="icon" />
       </div>
     )
@@ -74,12 +84,15 @@ Button.IconLeft = function ButtonIconLeft() {
 };
 
 Button.IconRight = function ButtonIconRight() {
-  const { iconRight, iconBorders } = useButtonContext();
+  const { iconRight, iconBorders, iconLeft } = useButtonContext();
+  const hasTwoIcons = iconLeft && iconRight;
   const borderStyle =
-    "rounded-full border border-white flex-row-center-content";
+    "ui:rounded-full ui:border ui:border-white ui:flex-row-center-content";
   return (
     iconRight && (
-      <div className={`size-2.5 ${iconBorders ? borderStyle : ""}`}>
+      <div
+        className={`ui:size-2.5 ${iconBorders ? borderStyle : ""} ${hasTwoIcons ? "ui:cursor-pointer" : ""}`}
+      >
         <img src={iconRight} alt="icon" />
       </div>
     )

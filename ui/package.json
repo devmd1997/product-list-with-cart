@@ -20,13 +20,13 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && npm run build:css",
-    "build:css": "tailwindcss -m -i ./src/App.css -o ./dist/styles.css",
+    "build:css": "tailwindcss -m -i ./src/tailwind-entry.css -o ./dist/styles.css",
     "lint": "eslint .",
     "preview": "vite preview",
     "storybook": "concurrently 'npm run storybook:css' 'storybook dev -p 6006'",
-    "storybook:css": "tailwindcss -w -i ./src/App.css -o ./src/index.css",
+    "storybook:css": "tailwindcss -w -i ./src/tailwind-entry.css -o ./src/index.css",
     "build-storybook": "storybook build",
-    "build-storybook:css": "tailwindcss -m -i ./src/App.css -o ./src/index.css",
+    "build-storybook:css": "tailwindcss -m -i ./src/tailwind-entry.css -o ./src/index.css",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {

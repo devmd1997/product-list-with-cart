@@ -16,6 +16,13 @@ const meta = {
     iconBorders: { control: "boolean" },
     onClick: { action: "clicked" },
   },
+  decorators: [
+    (Story) => (
+      <div style={{ width: "160px" }}>
+        <Story />
+      </div>
+    ),
+  ],
 } satisfies Meta<typeof Button>;
 
 export default meta;
