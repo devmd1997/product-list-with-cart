@@ -1,43 +1,101 @@
+@import url("https://fonts.googleapis.com/css2?family=Red+Hat+Text:ital,wght@0,300..700;1,300..700&display=swap");
 @import "tailwindcss";
-#root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+
+:root {
+  --color-red: #c73b0f;
+
+  --color-rose-900: #260f08;
+  --color-rose-500: #87635a;
+  --color-rose-400: #ad8a85;
+  --color-rose-300: #caafa7;
+  --color-rose-100: #f5eeec;
+  --color-rose-50: #fcf8f6;
+
+  --color-green: #1ea575;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
+@theme {
+  --color-primary: var(--color-red);
+  --color-secondary: color-mix(in srgb, var(--color-red), black 25%);
+  --color-accent: var(--color-rose-400);
+
+  --color-text-default: var(--color-rose-900);
+  --color-text-on-hover: white;
+  --color-text-on-surface: var(--color-red);
+  --color-text-caption: var(--color-rose-500);
+
+  --color-icon-default: var(--color-rose-400);
+  --color-icon-on-hover: var(--color-rose-900);
+  --color-icon-on-surface: white;
+  --color-success: var(--color-green);
+
+  --color-background-default: var(--color-rose-50);
+  --color-backgorund-modal: white;
+
+  --color-button-primary: var(--color-red);
+  --color-button-secondary: white;
+  --color-button-primary-text: white;
+  --color-button-secondary-text: var(--color-rose-900);
+
+  --color-border-default: var(--color-rose-400);
+  --color-border-selected: var(--color-red);
+
+  --font-red-hat: "Red Hat Display", sans-serif;
+
+  --text-base: 16px;
+  --text-sm: 14px;
+  --text-lg: 24px;
+  --text-xl: 40px;
+
+  --spacing: 8px;
+
+  --breakpoint-sm: 375px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1440px;
+
+  --radius-xs: 5px;
+  --radius-sm: 10px;
+  --radius-md: 15px;
+  --radius-lg: 25px;
 }
 
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
+@utility text-preset-1 {
+  font-size: var(--text-xl);
+  line-height: 120%;
+  letter-spacing: 0px;
+  font-weight: bold;
+}
+
+@utility text-preset-2 {
+  font-size: var(--text-lg);
+  line-height: 125%;
+  letter-spacing: 0px;
+  font-weight: bold;
+}
+
+@utility text-preset-3 {
+  font-size: var(--text-base);
+  line-height: 150%;
+  letter-spacing: 0px;
+  font-weight: bold;
+}
+
+@utility text-preset-4 {
+  font-size: var(--text-sm);
+  line-height: 150%;
+  letter-spacing: 0px;
+  font-weight: normal;
+}
+
+@utility text-preset-5 {
+  font-size: var(--text-sm);
+  line-height: 150%;
+  letter-spacing: 0px;
+  font-weight: var(--font-weight-semibold);
+}
+
+@layer base {
+  html {
+    @apply font-red-hat;
   }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  a:nth-of-type(2) .logo {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
 }
