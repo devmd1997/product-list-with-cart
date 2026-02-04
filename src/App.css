@@ -36,6 +36,7 @@
   --color-button-secondary: white;
   --color-button-primary-text: white;
   --color-button-secondary-text: var(--color-rose-900);
+  --color-button-secondary-text-hover: var(--color-red);
 
   --color-border-default: var(--color-rose-400);
   --color-border-selected: var(--color-red);
@@ -94,8 +95,24 @@
   font-weight: var(--font-weight-semibold);
 }
 
+@utility flex-row-center-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@utility flex-row-between-center {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 @layer base {
   html {
     @apply font-red-hat;
+  }
+
+  button {
+    @apply cursor-pointer;
   }
 }
