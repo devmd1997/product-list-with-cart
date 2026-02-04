@@ -37,17 +37,17 @@ export function Button(props: ButtonProps) {
     <ButtonContext.Provider
       value={{ label, iconLeft, iconRight, primary, iconBorders }}
     >
-      <button
-        className={`ui:group ui:w-full ui:rounded-full ui:px-3 ui:py-2 ${hasTwoIcons ? "ui:flex-row-between-center" : "ui:flex-row-center-content"} ${buttonVariantStyle} ui:gap-1`}
-        onClick={(e) => {
-          e.preventDefault();
-          onClick?.();
-        }}
-      >
-        {iconLeft && <Button.IconLeft />}
-        {label && <Button.Label />}
-        {iconRight && <Button.IconRight />}
-      </button>
+        <button
+          className={`ui:group ui:w-full ui:rounded-full ui:px-3 ui:py-2 ${hasTwoIcons ? "ui:flex-row-between-center" : "ui:flex-row-center-content"} ${buttonVariantStyle} ui:gap-1`}
+          onClick={(e) => {
+            e.preventDefault();
+            onClick?.();
+          }}
+        >
+          {iconLeft && <Button.IconLeft />}
+          {label && <Button.Label />}
+          {iconRight && <Button.IconRight />}
+        </button>
     </ButtonContext.Provider>
   );
 }
