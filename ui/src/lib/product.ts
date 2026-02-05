@@ -10,5 +10,5 @@ export type Product = {
     image: ProductImage;
     name: string;
     category: string;
-    price: string;
+    price: number;
 }

@@ -1,6 +1,6 @@
 import { createContext, useContext } from "react";
 
-type ButtonProps = {
+export type ButtonProps = {
   primary: boolean;
   label?: string;
   onClick?: () => void;
@@ -33,21 +33,24 @@ export function Button(props: ButtonProps) {
   const buttonVariantStyle = primary
     ? `ui:bg-button-primary ${hasTwoIcons ? "ui:cursor-default" : "ui:hover:bg-button-primary-hover"}`
     : "ui:bg-button-secondary ui:border ui:border-border-default ui:hover:border-border-selected";
+
+  const padding =
+    primary && !hasTwoIcons ? "ui:px-3 ui:py-2" : "ui:px-[12px] ui:py-[12px]";
   return (
     <ButtonContext.Provider
       value={{ label, iconLeft, iconRight, primary, iconBorders }}
     >
-        <button
-          className={`ui:group ui:w-full ui:rounded-full ui:px-3 ui:py-2 ${hasTwoIcons ? "ui:flex-row-between-center" : "ui:flex-row-center-content"} ${buttonVariantStyle} ui:gap-1`}
-          onClick={(e) => {
-            e.preventDefault();
-            onClick?.();
-          }}
-        >
-          {iconLeft && <Button.IconLeft />}
-          {label && <Button.Label />}
-          {iconRight && <Button.IconRight />}
-        </button>
+      <button
+        className={`ui:group ui:w-full ui:rounded-full ${padding} ${hasTwoIcons ? "ui:flex-row-between-center" : "ui:flex-row-center-content"} ${buttonVariantStyle} ui:gap-1`}
+        onClick={(e) => {
+          e.preventDefault();
+          onClick?.();
+        }}
+      >
+        {iconLeft && <Button.IconLeft />}
+        {label && <Button.Label />}
+        {iconRight && <Button.IconRight />}
+      </button>
     </ButtonContext.Provider>
   );
 }
@@ -96,5 +99,35 @@ Button.IconRight = function ButtonIconRight() {
         <img src={iconRight} alt="icon" />
       </div>
     )
+  );
+};
+
+interface AddToCartButtonProps {
+  onClick: () => void;
+}
+export const AddToCartButton = (props: AddToCartButtonProps) => (
+  <Button
+    {...props}
+    primary={false}
+    label="Add to cart"
+    iconLeft="/images/icon-add-to-cart.svg"
+  />
+);
+
+interface IncrementButtonProps {
+  onClick: () => void;
+  count: number;
+}
+
+export const IncrementButton = (props: IncrementButtonProps) => {
+  return (
+    <Button
+      {...props}
+      primary={true}
+      label={`${props.count}`}
+      iconLeft="/images/icon-increment-quantity.svg"
+      iconRight="/images/icon-decrement-quantity.svg"
+      iconBorders={true}
+    />
   );
 };

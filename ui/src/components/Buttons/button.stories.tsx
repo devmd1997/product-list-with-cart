@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import { Button } from "./button";
 import AddToCartIcon from "/images/icon-add-to-cart.svg";
 import DecrementIcon from "/images/icon-decrement-quantity.svg";
@@ -26,22 +26,24 @@ const meta = {
 } satisfies Meta<typeof Button>;
 
 export default meta;
+
+const Template: StoryFn<typeof Button> = ({...args}) => (
+  <Button {...args} />
+)
 type Story = StoryObj<typeof meta>;
 
-export const Primary: Story = {
-  args: {
-    primary: true,
-    label: "Placeholder",
-  },
+export const Primary = Template.bind({});
+Primary.args = {
+  primary: true,
+  label: "Button",
 };
 
-export const AddToCart: Story = {
-  args: {
-    primary: false,
+export const AddToCart = Template.bind({});
+AddToCart.args = {
+  primary: false,
     label: "Add to cart",
     iconLeft: AddToCartIcon,
-  },
-};
+}
 
 export const Increment: Story = {
   args: {

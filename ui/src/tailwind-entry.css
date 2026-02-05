@@ -50,6 +50,7 @@
 
   --color-border-default: var(--ui-color-rose-400);
   --color-border-selected: var(--ui-color-red);
+  --color-divider: var(--ui-color-rose-100);
 
   --font-red-hat: "Red Hat Display", sans-serif;
 
@@ -125,6 +126,51 @@
   flex-direction: column;
 }
 
+@utility flex-col-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@utility list-dividers {
+  content: "";
+  display: block;
+  width: 100%;
+  height: 1px;
+  background-color: var(--ui-color-divider);
+}
+
+@utility default-modal-container {
+  border-radius: 12px;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 32px;
+  background-color: white;
+  max-width: 700px;
+}
+
+@utility extended-modal-container {
+  border-top-right-radius: 12px;
+  border-top-left-radius: 12px;
+  padding: 40px 24px 24px 24px;
+  position: absolute;
+  inset-inline: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  gap: 32px;
+  max-height: 80vh;
+  overflow-y: auto;
+  background-color: white;
+}
+
 @layer base {
   html {
     @apply ui:font-red-hat;
@@ -132,5 +178,11 @@
 
   button {
     @apply ui:cursor-pointer;
+  }
+}
+
+@layer components {
+  .modal-container {
+    @apply ui:max-md:extended-modal-container ui:md:default-modal-container;
   }
 }
