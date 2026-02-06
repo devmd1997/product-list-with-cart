@@ -1,38 +1,27 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import {Button} from 'product-list-with-cart';
-import './App.css'
-import 'product-list-with-cart/styles.css'
+import { Page, SpaceBetween } from "product-list-with-cart";
+import "./App.css";
+import "product-list-with-cart/styles.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
     <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button className='my-button' onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <Button label='Continue' primary={true} />
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+      <Page className="p-3 md:p-5 lg:px-5 lg:py-11">
+        <SpaceBetween
+          direction="vertical"
+          spacing="lg"
+          fullWidth={true}
+          lg={{ direction: "horizontal" }}
+        >
+          <div className="flex h-[1000px] w-full items-center justify-center bg-blue-500 text-center">
+            <p>Primary Content</p>
+          </div>
+          <div className="flex h-[550px] w-full items-center justify-center bg-blue-200 text-center lg:w-[380px]">
+            Secondary Content
+          </div>
+        </SpaceBetween>
+      </Page>
     </>
-  )
+  );
 }
 
-export default App
+export default App;

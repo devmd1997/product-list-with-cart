@@ -5,6 +5,7 @@ type ContainerProps = PropsWithChildren & {
   className?: string;
   title?: string;
   button?: React.ReactNode;
+  backgroundColor?: "primary" | "secondary";
 };
 
 type ContainerContext = {
@@ -24,17 +25,21 @@ function useContainerContext() {
 }
 
 export function Container(props: ContainerProps) {
-  const { className, title, button, children } = props;
+  const { className, title, button, children, backgroundColor } = props;
 
+  const backgroundStyle =
+    backgroundColor === "secondary"
+      ? "ui:bg-background-secondary"
+      : "ui:bg-background-default";
   return (
     <ContainerContext.Provider value={{ props }}>
-      <div
-        className={`ui:flex-col-top-left ui:w-full ui:gap-3 ui:p-3 ui:bg-background-modal ui:rounded-xl ${className}`}
+      <section
+        className={`ui:flex-col-top-left ui:w-full ui:gap-3 ui:p-3 ${backgroundStyle} ui:rounded-xl ${className}`}
       >
         {title && <Container.Header />}
         {children}
         {button}
-      </div>
+      </section>
     </ContainerContext.Provider>
   );
 }

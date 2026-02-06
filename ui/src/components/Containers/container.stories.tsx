@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from "@storybook/react-vite";
+import type { Meta, StoryFn, StoryObj } from "@storybook/react-vite";
 import { Container } from "./Container";
 import { Button } from "../Buttons";
 import { ListContainer } from "./ListContainer";
+import { Label } from "../Labels";
 
 const meta = {
   title: "Components/Containers/Container",
@@ -18,7 +19,8 @@ const meta = {
   decorators: [
     (Story) => (
       <div
-        style={{ width: "600px", padding: "24px", backgroundColor: "#fcf8f6" }}
+        style={{ width: "600px", padding: "24px" }}
+        className="ui:bg-gray-300"
       >
         <Story />
       </div>
@@ -60,6 +62,11 @@ const ListComponent = () => {
     </ListContainer>
   );
 };
+const DefaultTemplate: StoryFn<typeof Container> = ({ ...args }) => (
+  <Container {...args} className="ui:text-center">
+    <Label textPreset={3} text="Some Content" />
+  </Container>
+);
 
 export const YourCartContainer = {
   args: {
@@ -67,3 +74,5 @@ export const YourCartContainer = {
     button: confirmationButton(),
   },
 } satisfies Story;
+
+export const ContainerWithText = DefaultTemplate.bind({});
